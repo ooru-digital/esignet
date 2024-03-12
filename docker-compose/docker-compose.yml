@@ -10,9 +10,10 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./pgdata:/var/lib/postgresql/data
 
   artifactory-server:
-    image: 'anushas/artifactory-server:local'
+    image: 'ooru/artifactory-server:local'
     ports:
       - 8080:8080
 
@@ -32,6 +33,7 @@ services:
       - artifactory-server
     volumes:
       - ./config/mock-identity-system-default.properties:/home/mosip/mock-identity-system-default.properties
+      - ./config/local.p12:/home/mosip/local.p12
 
 
   zookeeper:
@@ -70,6 +72,7 @@ services:
       - kafka
     volumes:
       - ./config/esignet-default.properties:/home/mosip/esignet-default.properties
+      - ./config/esignet/local.p12:/home/mosip/local.p12
       - ./loader_path/:/home/mosip/additional_jars/
 
   esignet-ui:
