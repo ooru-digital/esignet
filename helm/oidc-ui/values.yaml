@@ -52,7 +52,7 @@ service:
 image:
   registry: docker.io
   repository: mosipid/oidc-ui
-  tag: 1.3.0
+  tag: 1.4.0
 
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -430,8 +430,8 @@ oidc_ui:
       DEFAULT_THEME: ''
       DEFAULT_LANG: 'en'
       DEFAULT_FEVICON: 'favicon.ico'
-      DEFAULT_TITLE: 'e-Signet'
-      DEFAULT_ID_PROVIDER_NAME: 'e-Signet'
+      DEFAULT_TITLE: 'eSignet'
+      DEFAULT_ID_PROVIDER_NAME: 'eSignet'
 
 ## OIDC UI swagger should have only internal access. Hence linked to internal gateway
 ## We create a gateway for esignet specific URL(s) listed under `hosts`

@@ -54,7 +54,7 @@ services:
       KAFKA_CREATE_TOPICS: "esignet-linked:1:1,esignet-consented:1:1"
 
   esignet:
-    image: 'mosipid/esignet:1.3.0'
+    image: 'mosipdev/esignet:develop'
     user: root
     ports: 
       - 8088:8088
@@ -73,7 +73,7 @@ services:
       - ./loader_path/:/home/mosip/additional_jars/
 
   esignet-ui:
-    image: 'mosipid/oidc-ui:1.3.0'
+    image: 'mosipdev/oidc-ui:develop'
     user: root
     ports: 
       - 3000:3000

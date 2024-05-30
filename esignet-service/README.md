@@ -21,6 +21,8 @@ Both mock plugin and the MOSIP IDA plugin supports only scoped based VC issuance
 
  > https://github.com/mosip/id-authentication/tree/master/authentication/esignet-integration-impl
 
+ > https://github.com/mosip/digital-credential-plugins
+
 4. All the required plugins are runtime dependency to esignet-service.
 
 ![](/docs/esignet-service-basic-interations.png)

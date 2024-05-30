@@ -21,7 +21,7 @@ if [ "$flag" = "n" ]; then
 fi
 
 NS=esignet
-CHART_VERSION=12.0.1-B4
+CHART_VERSION=12.0.1
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -87,7 +87,7 @@ function installing_onboarder() {
     kubectl -n config-server get deploy -o name | xargs -n1 -t kubectl -n config-server rollout status
     kubectl rollout restart deployment -n esignet esignet
     kubectl rollout restart deployment -n resident resident
-    echo E-signet MISP License Key and Resident OIDC Client ID updated successfully.
+    echo eSignet MISP License Key and Resident OIDC Client ID updated successfully.
 
     echo Reports are moved to S3 under onboarder bucket
 

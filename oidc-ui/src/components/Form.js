@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import ErrorIndicator from "../common/ErrorIndicator";
 import LoadingIndicator from "../common/LoadingIndicator";
 import {
   buttonTypes,
@@ -8,76 +9,48 @@ import {
   challengeTypes,
   configurationKeys,
 } from "../constants/clientConstants";
-import { passwordFields } from "../constants/formFields";
 import { LoadingStates as states } from "../constants/states";
 import FormAction from "./FormAction";
 import InputWithImage from "./InputWithImage";
 import ReCAPTCHA from "react-google-recaptcha";
 import ErrorBanner from "../common/ErrorBanner";
-import langConfigService from "../services/langConfigService";
 
-const fields = passwordFields;
 let fieldsState = {};
-fields.forEach((field) => (fieldsState["Password_" + field.id] = ""));
 
-const langConfig = await langConfigService.getEnLocaleConfiguration();  
-
-export default function Password({
-  param,
+export default function Form({
   authService,
   openIDConnectService,
   backButtonDiv,
-  i18nKeyPrefix1 = "password",
-  i18nKeyPrefix2 = "errors",
+  i18nKeyPrefix = "Form",
 }) {
-
-  const { t: t1, i18n } = useTranslation("translation", {
-    keyPrefix: i18nKeyPrefix1,
+  const { t, i18n } = useTranslation("translation", {
+    keyPrefix: i18nKeyPrefix,
   });
-
-  const { t: t2 } = useTranslation("translation", {
-    keyPrefix: i18nKeyPrefix2,
-  });
-
+  
   const inputCustomClass =
     "h-10 border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[hsla(0, 0%, 51%)] focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-muted-light-gray shadow-none";
 
-  const fields = param;
-  const post_AuthenticateUser = authService.post_PasswordAuthenticate;
+  const fields = openIDConnectService.getEsignetConfiguration(configurationKeys.authFactorKnowledgeFieldDetails) ?? [];
+  fields.forEach((field) => (fieldsState["_form_" + field.id] = ""));
+  const post_AuthenticateUser = authService.post_AuthenticateUser;
   const buildRedirectParams = authService.buildRedirectParams;
 
   const [loginState, setLoginState] = useState(fieldsState);
-  const [errorBanner, setErrorBanner] = useState(null);
-  const [inputErrorBanner, setInputErrorBanner] = useState([]);
+  const [error, setError] = useState(null);
+  const [errorBanner, setErrorBanner] = useState([]);
   const [status, setStatus] = useState(states.LOADED);
   const [invalidState, setInvalidState] = useState(true);
 
-  const [forgotPassword, setForgotPassword] = useState(false);
-  const [forgotPasswordURL, setForgotPasswordURL] = useState("");
+  useEffect(() => {  
+  }, []);
 
-  let forgotPasswordConfig = openIDConnectService.getEsignetConfiguration(
-    configurationKeys.forgotPasswordConfig
-  );
-  
-  useEffect(() => {
-    if(forgotPasswordConfig?.[configurationKeys.forgotPassword]) {
-      setForgotPassword(true);
-      setForgotPasswordURL(forgotPasswordConfig[configurationKeys.forgotPasswordURL] + "#" + authService.getAuthorizeQueryParam())
-    }
-  }, [i18n.language]);
-
-  const bannerCloseTimer =
-    openIDConnectService.getEsignetConfiguration(
-      configurationKeys.bannerCloseTimer
-    ) ?? "";
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    onCloseHandle();
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     authenticateUser();
@@ -110,17 +83,20 @@ export default function Password({
   const authenticateUser = async () => {
     try {
       let transactionId = openIDConnectService.getTransactionId();
-
-      let uin = fields[0].prefix + loginState["Password_mosip-uin"] + fields[0].postfix;
-      let challengeType = challengeTypes.pwd;
-      let challenge = loginState["Password_password"];
-      let challengeFormat = challengeFormats.pwd;
+      let uin = loginState["_form_"+openIDConnectService.getEsignetConfiguration(configurationKeys.authFactorKnowledgeIndividualIdField) ?? ""];
+      let challengeManipulate = {};
+      fields.forEach(function(field) {
+        if(field.id !== openIDConnectService.getEsignetConfiguration(configurationKeys.authFactorKnowledgeIndividualIdField)){
+          challengeManipulate[field.id] = loginState["_form_"+field.id]
+        }
+      });
+      let challenge = btoa(JSON.stringify(challengeManipulate));
 
       let challengeList = [
         {
-          authFactorType: challengeType,
+          authFactorType: "KBA",
           challenge: challenge,
-          format: challengeFormat,
+          format: "base64url-encoded-json",
         },
       ];
 
@@ -136,51 +112,21 @@ export default function Password({
       setStatus(states.LOADED);
 
       const { response, errors } = authenticateResponse;
-      
+
       if (errors != null && errors.length > 0) {
-        
-        let errorCodeCondition = langConfig.errors.password[errors[0].errorCode] !== undefined && langConfig.errors.password[errors[0].errorCode] !== null;
-
-        if (errorCodeCondition) {
-          setErrorBanner({
-            errorCode: `password.${errors[0].errorCode}`,
-            show: true
+        if(errors[0].errorCode === "auth_failed"){
+          setError({
+            defaultMsg: t(`${errors[0].errorCode}`)
+          });
+        }else{
+          setError({
+            errorCode: `${errors[0].errorCode}`
           });
         }
-        else if (errors[0].errorCode === "invalid_transaction") {
-          let state = openIDConnectService.getState();
-          let redirect_uri = openIDConnectService.getRedirectUri();
-
-          if (!redirect_uri) {
-            return;
-          }
-
-          let params = "?";
-
-          if (errors[0].errorCode) {
-            params = params + "error_description=" + errors[0].errorCode + "&";
-          }
-
-          //REQUIRED
-          params = params + "state=" + state + "&";
-
-          //REQUIRED
-          params = params + "error=" + errors[0].errorCode;
-
-          window.onbeforeunload = null;
-
-          window.location.replace(redirect_uri + params);
-        }
-        else {
-          setErrorBanner({
-            errorCode: `${errors[0].errorCode}`,
-            show: true
-          });
-        }
-        _reCaptchaRef.current.reset();
+        _reCaptchaRef.current.reset();        
         return;
       } else {
-        setErrorBanner(null);
+        setError(null);
 
         let nonce = openIDConnectService.getNonce();
         let state = openIDConnectService.getState();
@@ -197,12 +143,13 @@ export default function Password({
         });
       }
     } catch (error) {
-      setErrorBanner({
-        errorCode: "password.auth_failed",
-        show: true
+      setError({
+        prefix: "authentication_failed_msg",
+        errorCode: error.message,
+        defaultMsg: error.message,
       });
       setStatus(states.ERROR);
-      _reCaptchaRef.current.reset();
+      _reCaptchaRef.current.reset();        
     }
   };
 
@@ -210,11 +157,7 @@ export default function Password({
     let loadComponent = async () => {
       i18n.on("languageChanged", () => {
         if (showCaptcha) {
-          //to rerender recaptcha widget on language change
-          setShowCaptcha(false);
-          setTimeout(() => {
-            setShowCaptcha(true);
-          }, 1);
+          setShowCaptcha(true);
         }
       });
     };
@@ -227,39 +170,22 @@ export default function Password({
   }, [loginState]);
 
   const onCloseHandle = () => {
-    setErrorBanner(null);
+    let tempBanner = errorBanner.map((_) => _);
+    tempBanner[0].show = false;
+    setErrorBanner(tempBanner);
   };
-
-  const onBlurChange = (e, errors) => {
-    let id = e.target.id;
-    let tempError = inputErrorBanner.map(_ => _);
-    if (errors.length > 0) {
-      tempError.push(id)
-    } else {
-      let errorIndex = tempError.findIndex(_ => _ === id);
-      if (errorIndex !== -1) {
-        tempError.splice(errorIndex, 1);
-      }
-    }
-    setInputErrorBanner(tempError);
-  };
-
-  const handleForgotPassword = () => {
-    window.onbeforeunload = null
-  }
 
   return (
     <>
       <div className="grid grid-cols-8 items-center">
-        {backButtonDiv}
+      {(backButtonDiv)}
       </div>
 
-      {errorBanner !== null && (
+      {errorBanner.length > 0 && (
         <ErrorBanner
-          showBanner={errorBanner.show}
-          errorCode={t2(errorBanner.errorCode)}
+          showBanner={errorBanner[0]?.show}
+          errorCode={errorBanner[0]?.errorCode}
           onCloseHandle={onCloseHandle}
-          bannerCloseTimer={bannerCloseTimer}
         />
       )}
 
@@ -267,31 +193,21 @@ export default function Password({
         {fields.map((field) => (
           <div className="-space-y-px">
             <InputWithImage
-              key={"Password_" + field.id}
+              key={"_form_" + field.id}
               handleChange={handleChange}
-              blurChange={onBlurChange}
-              value={loginState["Password_" + field.id]}
-              labelText={t1(field.labelText)}
-              labelFor={field.labelFor}
-              id={"Password_" + field.id}
-              name={field.name}
+              value={loginState["_form_" + field.id]}
+              labelText={t(field.id)}
+              labelFor={field.id}
+              id={"_form_" + field.id}
               type={field.type}
-              isRequired={field.isRequired}
-              placeholder={t1(field.placeholder)}
+              isRequired={true}
+              placeholder={t(field.id + "_placeholder" )}
               customClass={inputCustomClass}
               imgPath={null}
               icon={field.infoIcon}
-              prefix={field.prefix}
-              errorCode={field.errorCode}
-              maxLength={field.maxLength}
-              regex={field.regex}
             />
           </div>
         ))}
-
-        {forgotPassword && 
-          <a className="forgot-password-hyperlink" href={forgotPasswordURL} onClick={() => handleForgotPassword()} target="_self">{t1("forgot_password")}</a>
-        }
 
         {showCaptcha && (
           <div className="block password-google-reCaptcha">
@@ -307,11 +223,11 @@ export default function Password({
 
         <FormAction
           type={buttonTypes.submit}
-          text={t1("login")}
-          id="verify_password"
+          text={t("login")}
+          id="verify_form"
           disabled={
             invalidState ||
-            (inputErrorBanner && inputErrorBanner.length > 0) ||
+            (errorBanner && errorBanner.length > 0) ||
             (showCaptcha && captchaToken === null)
           }
         />
@@ -320,6 +236,13 @@ export default function Password({
         <div className="mt-2">
           <LoadingIndicator size="medium" message="authenticating_msg" />
         </div>
+      )}
+      {status !== states.LOADING && error && (
+        <ErrorIndicator
+          prefix={error.prefix}
+          errorCode={error.errorCode}
+          defaultMsg={error.defaultMsg}
+        />
       )}
     </>
   );

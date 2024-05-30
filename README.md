@@ -1,7 +1,11 @@
 [![Maven Package upon a push](https://github.com/mosip/esignet/actions/workflows/push-trigger.yml/badge.svg?branch=master)](https://github.com/mosip/esignet/actions/workflows/push-trigger.yml)
+[![Maven Package upon a push](https://github.com/mosip/esignet/actions/workflows/push-trigger.yml/badge.svg?branch=master)](https://github.com/mosip/esignet/actions/workflows/push-trigger.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mosip_esignet&id=mosip_esignet&metric=alert_status)](https://sonarcloud.io/dashboard?id=mosip_esignet)
 # e-Signet Project
 ## Overview
+This repository contains the implementation of 
+* Authorization Code flow of OAuth 2.0. Supports all the mandatory features of OIDC (Open ID Connect) specification.
+* VC Issuance Flow, supports only [wallet initiated flow](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html#name-authorization-code-flow)
 This repository contains the implementation of 
 * Authorization Code flow of OAuth 2.0. Supports all the mandatory features of OIDC (Open ID Connect) specification.
 * VC Issuance Flow, supports only [wallet initiated flow](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-12.html#name-authorization-code-flow)
@@ -32,7 +36,16 @@ The project requires JDK 11.
 To simplify running eSignet in local for developers we have added [Docker Compose Setup](docker-compose/README.md). 
 This docker-compose includes eSignet service and UI along with mock-identity-system to test the local deployment. 
   
+
+## Run eSignet (for developers)
+To simplify running eSignet in local for developers we have added [Docker Compose Setup](docker-compose/README.md). 
+This docker-compose includes eSignet service and UI along with mock-identity-system to test the local deployment. 
+  
 ## APIs
+API documentation is available [here](docs/esignet-openapi.yaml).
+
+## Documentation
+eSignet documentation is available [here](https://docs.esignet.io/).
 API documentation is available [here](docs/esignet-openapi.yaml).
 
 ## Documentation
