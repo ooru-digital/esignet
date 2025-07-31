@@ -204,7 +204,7 @@
     "wellknown_api": ".wellknown API"
   },
   "header": {
-    "login_heading": "Login using eSignet",
+    "login_heading": "Verify",
     "verify_heading": "Verify using eSignet",
     "link_heading": "Link using eSignet",
     "login_subheading": "<strong>{{clientName}}</strong> is requesting authentication for login",
@@ -222,7 +222,7 @@
     "subheading": "{{clientName}} is asking for your Information",
     "subheader_text": {
       "all_login_options": "Please choose the login option",
-      "otp_login": "Please enter your UIN/VID",
+      "otp_login": "Verify to download your certificate",
       "biometrics_login": "Please enter your UIN/VID & verify using the Biometric device",
       "pin_login": "Please enter your UIN/VID and PIN",
       "password_login": "Please enter your UIN/VID and password",
@@ -250,7 +250,7 @@
   },
   "tooltips": {
     "vid_info": "Please fill in this field",
-    "otp_info": "Enter your generated UIN/VID",
+    "otp_info": "Enter your generated Certificate ID",
     "bio_info": "Enter your generated UIN/VID",
     "pin_info": "Enter your generated UIN/VID",
     "username_info": "Enter your generated UIN/VID",
