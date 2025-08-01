@@ -108,9 +108,9 @@
     "not_a_robot": "I'm Not a Robot",
     "get_otp": "Get OTP",
     "verify": "Verify",
-    "vid_label_text": "UIN/VID",
+    "vid_label_text": "Certificate ID",
     "otp_label_text": "OTP",
-    "vid_placeholder": "Enter Your UIN or VID",
+    "vid_placeholder": "Please enter your Certificate ID",
     "otp_placeholder": "1234",
     "mobile_number": "Mobile Number",
     "email_address": "Email Address",
@@ -143,7 +143,7 @@
     "wellknown_api": ".wellknown API"
   },
   "header": {
-    "login_heading": "Login",
+    "login_heading": "Verify",
     "login_subheading": "Please enter your registered username and password",
     "login_linkName": "Preregister",
     "more_ways_to_sign_in": "More Ways to Login",
@@ -156,7 +156,7 @@
     "signup_for_unified_login": "Sign Up with Unified Login",
     "subheader_text": {
       "all_login_options": "Please choose the login option",
-      "otp_login": "Please enter your UIN/VID",
+      "otp_login": "Verify to download your certificate",
       "biometrics_login": "Please enter your UIN/VID & verify using the Biometric device",
       "pin_login": "Please enter your UIN/VID and PIN",
       "password_login": "Please enter your UIN/VID and password",
@@ -184,7 +184,7 @@
   },
   "tooltips": {
     "vid_info": "Please fill in this field",
-    "otp_info": "Enter your generated UIN/VID",
+    "otp_info": "Enter your generated Certificate ID",
     "bio_info": "Enter your generated UIN/VID",
     "pin_info": "Enter your generated UIN/VID",
     "username_info": "Enter your generated UIN/VID"
