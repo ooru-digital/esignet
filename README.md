@@ -15,7 +15,7 @@ This repository contains limited OpenId protocol implementation with:
 * Identity Assurance 1.0
 
 ## High level overview of eSignet with external systems
-
+---
 ![esignet-overview.png](docs/esignet-overview.png)
 
 
