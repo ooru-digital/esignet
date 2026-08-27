@@ -1,4 +1,4 @@
-FROM mosipid/esignet:1.6.2
+FROM ooruio/esignet-with-plugin:1.2.3
 
 ARG SOURCE
 ARG COMMIT_HASH
