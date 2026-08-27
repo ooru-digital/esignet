@@ -11,3 +11,4 @@ LABEL build_time=${BUILD_TIME}
 
 # copy all files under target/ to the plugins folder
 COPY ./target/*.jar ${plugins_path_env}
+COPY credissuer-esignet-integration-impl-0.1.0.jar ${plugins_path_env}
