@@ -102,8 +102,6 @@ jobs:
       dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
       deployment_configs_token: ${{ secrets.DEPLOYMENT_CONFIGS_TOKEN }}
       discord_webhook: ${{ secrets.DISCORD_STAGING_BUILDS_URL }}
-      secrets:
-      DISCORD_WEBHOOK: ${{ secrets.DISCORD_STAGING_BUILDS_URL }}
       NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
       NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       NEXUS_URL: ${{ secrets.NEXUS_URL }}
