@@ -152,9 +152,9 @@
     "not_a_robot": "ខ្ញុំមិនមែនជាមនុស្សយន្តទេ។",
     "get_otp": "ទទួលបាន OTP",
     "verify": "ផ្ទៀងផ្ទាត់",
-    "vid_label_text": "UIN/VID",
+    "vid_label_text": "លេខសម្គាល់វិញ្ញាបនបត្រ",
     "otp_label_text": "OTP",
-    "vid_placeholder": "បញ្ចូល UIN ឬ VID របស់អ្នក។",
+    "vid_placeholder": "បញ្ចូលលេខសម្គាល់វិញ្ញាបនបត្រ",
     "otp_placeholder": "១២៣៤",
     "mobile_number": "លេខទូរសព្ទ",
     "email_address": "អាសយដ្ឋានអ៊ីមែល",
@@ -166,7 +166,7 @@
     "invalid_input": "សូមបញ្ចូលសុពលភាព {{id}}",
     "mobile": "លេខទូរសព្ទ",
     "nrc": "លេខសម្គាល់ NRC",
-    "vid": "យូអ៊ីន/វីឌី",
+    "vid": "លេខសម្គាល់វិញ្ញាបនបត្រ",
     "email": "អ៊ីមែល",
     "login_with_id": "ចូលដោយប្រើ {{currentID}}",
     "verify_with_id": "ផ្ទៀងផ្ទាត់ជាមួយ {{currentID}}",
@@ -204,7 +204,7 @@
     "wellknown_api": ".ល្បី API"
   },
   "header": {
-    "login_heading": "ចូលដោយប្រើ eSignet",
+    "login_heading": "ផ្ទៀងផ្ទាត់",
     "verify_heading": "ផ្ទៀងផ្ទាត់ដោយប្រើ eSignet",
     "link_heading": "ភ្ជាប់ដោយប្រើ eSignet",
     "login_subheading": "<strong>{{clientName}}</strong> កំពុងស្នើសុំការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវសម្រាប់ការចូល",
@@ -222,7 +222,7 @@
     "subheading": "{{clientName}} កំពុងស្នើសុំព័ត៌មានរបស់អ្នក។",
     "subheader_text": {
       "all_login_options": "សូមជ្រើសរើសជម្រើសចូល",
-      "otp_login": "សូមបញ្ចូល UIN/VID របស់អ្នក។",
+      "otp_login": "ផ្ទៀងផ្ទាត់ដើម្បីទាញយកវិញ្ញាបនបត្ររបស់អ្នក",
       "biometrics_login": "សូមបញ្ចូល UIN/VID របស់អ្នក ហើយផ្ទៀងផ្ទាត់ដោយប្រើឧបករណ៍ជីវមាត្រ",
       "pin_login": "សូមបញ្ចូល UIN/VID និង PIN របស់អ្នក។",
       "password_login": "សូមបញ្ចូល UIN/VID និងពាក្យសម្ងាត់របស់អ្នក។",
@@ -250,7 +250,7 @@
   },
   "tooltips": {
     "vid_info": "សូមបំពេញក្នុងវាលនេះ។",
-    "otp_info": "បញ្ចូល UIN/VID ដែលបានបង្កើតរបស់អ្នក។",
+    "otp_info": "បញ្ចូលលេខសម្គាល់វិញ្ញាបនបត្រដែលបានបង្កើតរបស់អ្នក",
     "bio_info": "បញ្ចូល UIN/VID ដែលបានបង្កើតរបស់អ្នក។",
     "pin_info": "បញ្ចូល UIN/VID ដែលបានបង្កើតរបស់អ្នក។",
     "username_info": "បញ្ចូល UIN/VID ដែលបានបង្កើតរបស់អ្នក។",
@@ -300,20 +300,20 @@
     "buttons": {
       "mobile": "លេខទូរសព្ទ",
       "nrc": "លេខសម្គាល់ NRC",
-      "vid": "យូអ៊ីន/វីឌី",
+      "vid": "លេខសម្គាល់វិញ្ញាបនបត្រ",
       "email": "អ៊ីមែល"
     },
     "input": {
       "label": {
         "mobile": "លេខទូរសព្ទ",
         "nrc": "លេខសម្គាល់ NRC",
-        "vid": "យូអ៊ីន/វីឌី",
+        "vid": "លេខសម្គាល់វិញ្ញាបនបត្រ",
         "email": "អ៊ីមែល"
       },
       "placeholder": {
         "mobile": "បញ្ចូលលេខទូរស័ព្ទ",
         "nrc": "បញ្ចូលលេខសម្គាល់ NRC",
-        "vid": "បញ្ចូល យូអ៊ីន/វីឌី",
+        "vid": "បញ្ចូលលេខសម្គាល់វិញ្ញាបនបត្រ",
         "email": "បញ្ចូលលេខសម្គាល់អ៊ីមែល"
       }
     }
