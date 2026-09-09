@@ -27,6 +27,9 @@ jobs:
       deployment_configs_ref: production-main
       unit_test_status: "SKIPPED"
       trivy_status: "SKIPPED"
+      use_aws_auth: false
+      use_custom_kubeconfig: true
+      kubeconfig_path: "/home/ubuntu/.kube/prod.conf"
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
