@@ -84,18 +84,20 @@ export default function Otp({
         ) : (
           backButtonDiv
         )}
-        {otpStatus === OTPStatusEnum.getOtp && (
-          <div className="inline mx-2 font-semibold my-3">
-            {/*
-              according to the login id option, secondary heading value will be changed
-              if the login id option is single, then with secondary heading will pass a object with current id
-              if the login id option is multiple, then secondary heading will be passed as it is
-            */}
-            {t(secondaryHeading, loginIDs && loginIDs.length === 1 && {
-              currentID: t(loginIDs[0].id)
-            })}
-          </div>
-        )}
+        {otpStatus === OTPStatusEnum.getOtp && (() => {
+          // Hide secondary heading when translation is empty (CredIssuer VC download flow)
+          const secondaryHeadingText = t(
+            secondaryHeading,
+            loginIDs && loginIDs.length === 1 && {
+              currentID: t(loginIDs[0].id),
+            }
+          );
+          return secondaryHeadingText ? (
+            <div className="inline mx-2 font-semibold my-3">
+              {secondaryHeadingText}
+            </div>
+          ) : null;
+        })()}
       </div>
 
       {otpStatus === OTPStatusEnum.getOtp && (
