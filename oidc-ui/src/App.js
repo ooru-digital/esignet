@@ -53,7 +53,7 @@ function App() {
             });
           }
         }
-        changeLanguage(response);
+        i18n.changeLanguage("en");
         setDir(response.rtlLanguages.includes(i18n.language) ? "rtl" : "ltr");
 
         //Gets fired when changeLanguage got called.
@@ -71,54 +71,6 @@ function App() {
       return true;
     };
   }, []);
-
-  const changeLanguage = (loadLang) => {
-    //Language detector priotity order: ['querystring', 'cookie', 'localStorage',
-    //      'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
-
-    //1. Check for ui locales param. Highest priority.
-    //This will override the language detectors selected language
-    let { languages_2Letters: supportedLanguages, langCodeMapping } = loadLang;
-    let searchUrlParams = new URLSearchParams(window.location.search);
-    let uiLocales = searchUrlParams.get("ui_locales");
-    if (uiLocales) {
-      let languages = uiLocales.split(" ");
-      for (let idx in languages) {
-        if (supportedLanguages[languages[idx]]) {
-          i18n.changeLanguage(languages[idx]);
-          return;
-        }
-      }
-
-      // if language code not found in 2 letter codes, then check mapped language codes
-      for (let idx in languages) {
-        if (langCodeMapping[languages[idx]]) {
-          i18n.changeLanguage(langCodeMapping[languages[idx]]);
-          return;
-        }
-      }
-
-      let defaultLang = window._env_.DEFAULT_LANG;
-      // checking default language in 2 letter language code
-      if (defaultLang in supportedLanguages) {
-        i18n.changeLanguage(defaultLang);
-        return;
-      }
-      // checking default language in 3 letter language code
-      if (defaultLang in langCodeMapping) {
-        i18n.changeLanguage(langCodeMapping[defaultLang]);
-        return;
-      }
-    }
-
-    //2. Check for cookie
-    //Language detector will store and use cookie "i18nextLng"
-
-    //3. Check for system locale
-    //Language detector will check navigator and subdomain to select proper language
-
-    //4. default lang set in env-config file as fallback language.
-  };
 
   let el;
 

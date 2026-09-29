@@ -27,8 +27,8 @@ export default function Background({
     configurationKeys.additionalConfig
   );
 
-  const toggleSignupBanner = (exist) => {
-    if (exist) {
+  const toggleSignupBanner = (enabled) => {
+    if (enabled) {
       setSignupBanner(true);
       setSignupURL(
         signupConfig[configurationKeys.signupURL] +
@@ -41,14 +41,21 @@ export default function Background({
   };
 
   useEffect(() => {
-    if (clientAdditionalConfig?.[configurationKeys.signupBannerRequired]) {
-      toggleSignupBanner(configurationKeys.signupBannerRequired);
+    // Client additionalConfig.signup_banner_required overrides global signup.config
+    if (
+      clientAdditionalConfig &&
+      Object.prototype.hasOwnProperty.call(
+        clientAdditionalConfig,
+        configurationKeys.signupBannerRequired
+      )
+    ) {
+      toggleSignupBanner(
+        !!clientAdditionalConfig[configurationKeys.signupBannerRequired]
+      );
+    } else if (signupConfig?.[configurationKeys.signupBanner]) {
+      toggleSignupBanner(true);
     } else {
-      if (signupConfig?.[configurationKeys.signupBanner]) {
-        toggleSignupBanner(configurationKeys.signupBanner);
-      } else {
-        setSignupBanner(false);
-      }
+      setSignupBanner(false);
     }
   }, [i18n.language]);
 
@@ -82,20 +89,6 @@ export default function Background({
               <Trans i18nKey={i18nKeyPrefix + "." + subheading} defaults={subheading} values={{ clientName: clientName }} components={{ strong: <strong /> }} />
             </h1>
           )}
-        </div>
-        <div className="w-full flex mb-4 justify-center items-center pb-2">
-          {clientLogoPath && (
-            <img
-              className="object-contain client-logo-size client-logo-shadow rounded-[25px] border-[0.1px] border-white"
-              src={clientLogoPath}
-              alt={clientName}
-            />
-          )}
-          <span className="flex mx-5 alternate-arrow"></span>
-          <img
-            className="object-contain brand-only-logo client-logo-size"
-            alt={t("logo_alt")}
-          />
         </div>
         <div className="text-black lg:-mx-5 md:-mx-4 sm:-mx-3 -mx-3 login-card-separator"></div>
         {component}
