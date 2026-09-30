@@ -152,9 +152,9 @@
     "not_a_robot": "ನಾನು ರೋಬೋಟ್ ಅಲ್ಲ",
     "get_otp": "OTP ಪಡೆಯಿರಿ",
     "verify": "ಪರಿಶೀಲಿಸಿ",
-    "vid_label_text": "UIN/VID",
+    "vid_label_text": "ಪ್ರಮಾಣಪತ್ರ ಐಡಿ",
     "otp_label_text": "OTP",
-    "vid_placeholder": "ನಿಮ್ಮ UIN ಅಥವಾ VID ನಮೂದಿಸಿ",
+    "vid_placeholder": "ಪ್ರಮಾಣಪತ್ರ ಐಡಿ ನಮೂದಿಸಿ",
     "otp_placeholder": "1234",
     "mobile_number": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
     "email_address": "ಇಮೇಲ್ ವಿಳಾಸ",
@@ -166,7 +166,7 @@
     "invalid_input": "ದಯವಿಟ್ಟು ಮಾನ್ಯ {{id}} ನಮೂದಿಸಿ",
     "mobile": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
     "nrc": "ಎನ್ಆರ್ಸಿ ಐಡಿ",
-    "vid": "ಯುಐಎನ್ವಿ/ಐಡಿ",
+    "vid": "ಪ್ರಮಾಣಪತ್ರ ಐಡಿ",
     "email": "ಇಮೇಲ್",
     "login_with_id": "{{currentID}} ನೊಂದಿಗೆ ಲಾಗಿನ್ ಮಾಡಿ",
     "verify_with_id": "{{currentID}} ಬಳಸಿ ಪರಿಶೀಲಿಸಿ",
@@ -204,7 +204,7 @@
     "wellknown_api": "ಪ್ರಸಿದ್ಧ API"
   },
   "header": {
-    "login_heading": "eSignet ಬಳಸಿ ಲಾಗಿನ್ ಮಾಡಿ",
+    "login_heading": "ಪರಿಶೀಲಿಸಿ",
     "verify_heading": "eSignet ಬಳಸಿ ಪರಿಶೀಲಿಸಿ",
     "link_heading": "eSignet ಬಳಸಿ ಲಿಂಕ್ ಮಾಡಿ",
     "login_subheading": "<strong>{{clientName}}</strong> ಲಾಗಿನ್ ಗಾಗಿ ದೃಢೀಕರಣವನ್ನು ವಿನಂತಿಸುತ್ತಿದೆ",
@@ -222,7 +222,7 @@
     "subheading": "{{clientName}} ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಕೇಳುತ್ತಿದ್ದಾರೆ",
     "subheader_text": {
       "all_login_options": "ದಯವಿಟ್ಟು ಲಾಗಿನ್ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ",
-      "otp_login": "ದಯವಿಟ್ಟು ನಿಮ್ಮ UIN/VID ಅನ್ನು ನಮೂದಿಸಿ",
+      "otp_login": "ನಿಮ್ಮ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಪರಿಶೀಲಿಸಿ",
       "biometrics_login": "ದಯವಿಟ್ಟು ನಿಮ್ಮ UIN/VID ಅನ್ನು ನಮೂದಿಸಿ ಮತ್ತು ಬಯೋಮೆಟ್ರಿಕ್ ಸಾಧನವನ್ನು ಬಳಸಿಕೊಂಡು ಪರಿಶೀಲಿಸಿ",
       "pin_login": "ದಯವಿಟ್ಟು ನಿಮ್ಮ UIN/VID ಮತ್ತು PIN ನಮೂದಿಸಿ",
       "password_login": "ದಯವಿಟ್ಟು ನಿಮ್ಮ UIN/VID ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ನಮೂದಿಸಿ",
@@ -250,7 +250,7 @@
   },
   "tooltips": {
     "vid_info": "ದಯವಿಟ್ಟು ಈ ಕ್ಷೇತ್ರವನ್ನು ಭರ್ತಿ ಮಾಡಿ",
-    "otp_info": "ನೀವು ರಚಿಸಿದ UIN/VID ಅನ್ನು ನಮೂದಿಸಿ",
+    "otp_info": "ನೀವು ರಚಿಸಿದ ಪ್ರಮಾಣಪತ್ರ ಐಡಿ ನಮೂದಿಸಿ",
     "bio_info": "ನೀವು ರಚಿಸಿದ UIN/VID ಅನ್ನು ನಮೂದಿಸಿ",
     "pin_info": "ನೀವು ರಚಿಸಿದ UIN/VID ಅನ್ನು ನಮೂದಿಸಿ",
     "username_info": "ನೀವು ರಚಿಸಿದ UIN/VID ಅನ್ನು ನಮೂದಿಸಿ",
@@ -300,20 +300,20 @@
     "buttons": {
       "mobile": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
       "nrc": "ಎನ್ಆರ್ಸಿ ಐಡಿ",
-      "vid": "ಯುಐಎನ್ವಿ/ಐಡಿ",
+      "vid": "ಪ್ರಮಾಣಪತ್ರ ಐಡಿ",
       "email": "ಇಮೇಲ್"
     },
     "input": {
       "label": {
         "mobile": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
         "nrc": "ಎನ್ಆರ್ಸಿ ಐಡಿ",
-        "vid": "ಯುಐಎನ್ವಿ/ಐಡಿ",
+        "vid": "ಪ್ರಮಾಣಪತ್ರ ಐಡಿ",
         "email": "ಇಮೇಲ್"
       },
       "placeholder": {
         "mobile": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
         "nrc": "ಎನ್ಆರ್ಸಿ ಐಡಿ ನಮೂದಿಸಿ",
-        "vid": "ಯುಐಎನ್ವಿ/ಐಡಿ ನಮೂದಿಸಿ",
+        "vid": "ಪ್ರಮಾಣಪತ್ರ ಐಡಿ ನಮೂದಿಸಿ",
         "email": "ಇಮೇಲ್ ಐಡಿ ನಮೂದಿಸಿ"
       }
     }

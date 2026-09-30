@@ -142,6 +142,15 @@ CREATE TABLE esignet.public_key_registry(
   CONSTRAINT pk_public_key_registry PRIMARY KEY (id_hash, auth_factor)
 );
 
+CREATE TABLE esignet.kyc_auth(
+    kyc_token VARCHAR(255) NOT NULL,
+    individual_id VARCHAR(255),
+    partner_specific_user_token VARCHAR(255),
+    response_time TIMESTAMP,
+    transaction_id VARCHAR(255),
+    validity INTEGER,
+    CONSTRAINT pk_kyc_auth PRIMARY KEY (kyc_token)
+);
 
 INSERT INTO esignet.KEY_POLICY_DEF(APP_ID,KEY_VALIDITY_DURATION,PRE_EXPIRE_DAYS,ACCESS_ALLOWED,IS_ACTIVE,CR_BY,CR_DTIMES) VALUES('ROOT', 2920, 1125, 'NA', true, 'mosipadmin', now());
 INSERT INTO esignet.KEY_POLICY_DEF(APP_ID,KEY_VALIDITY_DURATION,PRE_EXPIRE_DAYS,ACCESS_ALLOWED,IS_ACTIVE,CR_BY,CR_DTIMES) VALUES('OIDC_SERVICE', 1095, 50, 'NA', true, 'mosipadmin', now());
